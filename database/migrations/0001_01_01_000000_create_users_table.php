@@ -13,11 +13,17 @@ return new class extends Migration
     {
         Schema::create('users', function (Blueprint $table) {
             $table->id();
-            $table->string('name');
-            $table->string('email')->unique();
+            $table->string('user_name');
+
+            $table->string('email')->unique()->nullable();
             $table->timestamp('email_verified_at')->nullable();
+            $table->string('phone')->unique()->nullable();
+            $table->timestamp('phone_verified_at')->nullable();
+
             $table->string('password');
             $table->rememberToken();
+
+            $table->softDeletes();
             $table->timestamps();
         });
 
@@ -34,6 +40,28 @@ return new class extends Migration
             $table->text('user_agent')->nullable();
             $table->longText('payload');
             $table->integer('last_activity')->index();
+        });
+
+        Schema::create('user_profiles', function (Blueprint $table) {
+            $table->id();
+            $table->foreignId('user_id')->unique()->index();
+            $table->string('slug')->unique();
+
+            $table->string('display_name');
+            $table->string('first_name')->nullable();
+            $table->string('last_name')->nullable();
+
+            $table->text('bio')->nullable();
+            $table->integer('age')->nullable();
+            $table->date('date_of_birth')->nullable();
+            $table->string('gender')->nullable();
+
+            $table->string('avatar_path')->nullable();
+            $table->string('background_path')->nullable();
+            $table->string('background_color')->default('#FFFFFF');
+
+            $table->softDeletes();
+            $table->timestamps();
         });
     }
 
