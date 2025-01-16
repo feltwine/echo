@@ -5,12 +5,16 @@ namespace App\Models;
 // use Illuminate\Contracts\Auth\MustVerifyEmail;
 use Illuminate\Database\Eloquent\Builder;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
+use Illuminate\Database\Eloquent\Relations\BelongsToMany;
+use Illuminate\Database\Eloquent\Relations\HasOne;
 use Illuminate\Database\Eloquent\SoftDeletes;
 use Illuminate\Foundation\Auth\User as Authenticatable;
 use Illuminate\Notifications\Notifiable;
 use Illuminate\Support\Carbon;
 
 /**
+ * @property UserProfile $userProfile
+ *
  * @property integer $id
  * @property string $user_name
  *
@@ -55,5 +59,9 @@ class User extends Authenticatable
 
             'password' => 'hashed',
         ];
+    }
+    public function userProfile(): HasOne
+    {
+        return $this->hasOne(UserProfile::class);
     }
 }
