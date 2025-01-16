@@ -53,7 +53,6 @@ return new class extends Migration
             $table->fullText(['display_name', 'first_name', 'last_name']);
 
             $table->text('bio')->nullable();
-            $table->integer('age')->nullable();
             $table->date('date_of_birth')->nullable();
             $table->enum('gender', ['male', 'female', 'other'])->nullable();
 
