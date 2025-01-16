@@ -4,8 +4,10 @@ namespace App\Models;
 
 use App\Models\Enums\Gender;
 use Illuminate\Database\Eloquent\Builder;
+use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Relations\BelongsTo;
+use Illuminate\Database\Eloquent\SoftDeletes;
 use Illuminate\Support\Carbon;
 
 /**
@@ -36,6 +38,7 @@ use Illuminate\Support\Carbon;
  */
 class UserProfile extends Model
 {
+    use HasFactory, SoftDeletes;
     protected $fillable = [
         'display_name',
         'first_name',
