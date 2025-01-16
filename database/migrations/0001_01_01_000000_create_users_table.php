@@ -50,11 +50,12 @@ return new class extends Migration
             $table->string('display_name');
             $table->string('first_name')->nullable();
             $table->string('last_name')->nullable();
+            $table->fullText(['display_name', 'first_name', 'last_name']);
 
             $table->text('bio')->nullable();
             $table->integer('age')->nullable();
             $table->date('date_of_birth')->nullable();
-            $table->string('gender')->nullable();
+            $table->enum('gender', ['male', 'female', 'other'])->nullable();
 
             $table->string('avatar_path')->nullable();
             $table->string('background_path')->nullable();
@@ -73,5 +74,6 @@ return new class extends Migration
         Schema::dropIfExists('users');
         Schema::dropIfExists('password_reset_tokens');
         Schema::dropIfExists('sessions');
+        Schema::dropIfExists('user_profiles');
     }
 };
