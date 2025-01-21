@@ -4,6 +4,7 @@ namespace App\Models;
 
 use App\Models\Enums\Gender;
 use Illuminate\Database\Eloquent\Builder;
+use Illuminate\Database\Eloquent\Casts\Attribute;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Relations\BelongsTo;
@@ -20,6 +21,7 @@ use Illuminate\Support\Carbon;
  * @property string $display_name
  * @property string|null $first_name
  * @property string|null $last_name
+ * @property string|null $full_name
  *
  * @property string|null $bio
  * @property integer|null $age
@@ -39,6 +41,7 @@ use Illuminate\Support\Carbon;
 class UserProfile extends Model
 {
     use HasFactory, SoftDeletes;
+
     protected $fillable = [
         'display_name',
         'first_name',
@@ -50,21 +53,42 @@ class UserProfile extends Model
 
         'background_color'
     ];
-    protected $attributes = [
-        'age'
-    ];
-    public function setSlug(): void
+
+    public function age(): Attribute
     {
-        $this->slug = $this->user->user_name;
+        return Attribute::make(
+            get: function () {
+                return Carbon::parse($this->date_of_birth)->age;
+            }
+        );
     }
-    public function setAge(): void
+
+    public function fullName(): Attribute|null
     {
-        $this->attributes['age'] = Carbon::parse($this->date_of_birth)->age;
+        if ($this->first_name or $this->last_name == null)
+            return null;
+
+        return Attribute::make(
+            get: function () {
+                return $this->first_name . ' ' . $this->last_name;
+            }
+        );
     }
+
+    public function slug(): Attribute
+    {
+        return Attribute::make(
+            get: function () {
+                return $this->user->user_name;
+            }
+        );
+    }
+
     public function setDefaultBackgroundColor(): void
     {
         $this->background_color = '#FFFFFF';
     }
+
     public function user(): BelongsTo
     {
         return $this->belongsTo(User::class);
