@@ -5,6 +5,7 @@ namespace Database\Factories;
 use App\Models\User;
 use App\Models\UserProfile;
 use Illuminate\Database\Eloquent\Factories\Factory;
+use phpDocumentor\Reflection\Types\Integer;
 
 /**
  * @extends \Illuminate\Database\Eloquent\Factories\Factory<\App\Models\UserProfile>
@@ -18,11 +19,12 @@ class UserProfileFactory extends Factory
      */
     public function definition(): array
     {
-        return [
-            'user_id' => User::create(),
-            'slug' => User::$user_name,
+        $user = User::get()->random();
 
-            'display_name' => User::$user_name,
+        return [
+            'user_id' => $user->id,
+
+            'display_name' => $user->user_name,
             'first_name' => $this->faker->firstName(),
             'last_name' => $this->faker->lastName(),
 
