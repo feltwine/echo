@@ -19,21 +19,18 @@ class UserProfileFactory extends Factory
      */
     public function definition(): array
     {
-        $user = User::get()->random();
-
         return [
-            'user_id' => $user->id,
-
-            'display_name' => $user->user_name,
+            'user_id' => User::factory(),
+            'display_name' => function (array $attributes) {
+                return User::find($attributes['user_id'])->user_name;
+            },
             'first_name' => $this->faker->firstName(),
             'last_name' => $this->faker->lastName(),
-
             'bio' => $this->faker->text(),
             'date_of_birth' => $this->faker->date(),
             'gender' => $this->faker->randomElement(['male', 'female', 'other', null]),
-
-            'avatar_path' => $this->faker->imageUrl(),
-            'background_path' => $this->faker->imageUrl(),
+            'avatar_path' => null,
+            'background_path' => null,
         ];
     }
 }
