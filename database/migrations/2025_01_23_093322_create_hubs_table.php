@@ -27,7 +27,7 @@ return new class extends Migration
             $table->timestamps();
         });
 
-        Schema::table('moderators', function (Blueprint $table) {
+        Schema::create('moderators', function (Blueprint $table) {
             $table->id();
             $table->foreignId('hub_id')->constrained('hubs')->onDelete('cascade');
             $table->foreignId('user_id')->constrained('users')->onDelete('cascade');
