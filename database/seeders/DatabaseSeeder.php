@@ -2,6 +2,9 @@
 
 namespace Database\Seeders;
 
+use App\Models\Comment;
+use App\Models\Hub;
+use App\Models\Post;
 use App\Models\User;
 
 // use Illuminate\Database\Console\Seeds\WithoutModelEvents;
@@ -16,8 +19,20 @@ class DatabaseSeeder extends Seeder
      */
     public function run(): void
     {
-        User::factory(250)
+        $users = User::factory(250)
             ->has(UserProfile::factory())
+            ->create();
+
+        Hub::factory(10)
+            ->recycle($users) // Reuse existing users instead of creating new ones
+            ->has(
+                Post::factory(rand(10, 20))
+                    ->recycle($users)
+                    ->has(
+                        Comment::factory(rand(0, 10))
+                            ->recycle($users)
+                    )
+            )
             ->create();
     }
 }
