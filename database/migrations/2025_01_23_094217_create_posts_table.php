@@ -30,6 +30,7 @@ return new class extends Migration
             $table->foreignId('user_id')->constrained('users')->onDelete('cascade');
             $table->foreignId('parent_id')->nullable()->constrained('comments')->onDelete('cascade');
             $table->text('body');
+            $table->string('image')->nullable();
             $table->integer('vote_count')->default(0);
             $table->timestamps();
             $table->softDeletes();
