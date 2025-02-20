@@ -75,4 +75,10 @@ class Hub extends Model
     {
         return $this->hasMany(Post::class);
     }
+
+    public function followers(): belongsToMany
+    {
+        return $this->BelongsToMany(User::class, 'hub_followers', 'hub_id', 'user_id')
+            ->withTimestamps();
+    }
 }
