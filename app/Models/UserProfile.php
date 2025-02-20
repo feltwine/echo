@@ -84,11 +84,6 @@ class UserProfile extends Model
         );
     }
 
-    public function setDefaultBackgroundColor(): void
-    {
-        $this->background_color = '#FFFFFF';
-    }
-
     public function user(): BelongsTo
     {
         return $this->belongsTo(User::class);
