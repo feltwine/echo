@@ -14,6 +14,8 @@ return new class extends Migration
         Schema::create('hubs', function (Blueprint $table) {
             $table->id();
             $table->foreignId('user_id')->constrained('users')->onDelete('cascade');
+            $table->integer('followers_count')->default(0);
+
             $table->string('name')->unique();
             $table->text('description')->nullable();
             $table->fullText(['name', 'description']);

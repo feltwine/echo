@@ -18,9 +18,11 @@ use Illuminate\Support\Carbon;
  * @property User $user
  * @property Collection<Moderator>|Moderator[] $moderators
  * @property Collection<Post>|Post[] $posts
+ * @property Collection<User>|User[] $followers
  *
  * @property integer $id
  * @property integer $user_id
+ * @property integer $follower_count
  *
  * @property string $name
  * @property string $slug

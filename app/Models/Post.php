@@ -3,6 +3,7 @@
 namespace App\Models;
 
 use Illuminate\Contracts\Database\Eloquent\Builder;
+use Illuminate\Database\Eloquent\Collection;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Relations\BelongsTo;
@@ -15,10 +16,12 @@ use Illuminate\Support\Carbon;
 /**
  * @property Hub $hub
  * @property User $user
+ * @property Collection<User>|User[] $followers
  *
  * @property integer $id
  * @property integer $user_id
  * @property integer $hub_id
+ * @property integer $follower_count
  *
  * @property string $title
  * @property string $slug
