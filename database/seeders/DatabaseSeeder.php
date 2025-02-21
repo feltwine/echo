@@ -33,6 +33,9 @@ class DatabaseSeeder extends Seeder
                             ->recycle($users)
                     )
             )
+            ->afterCreating(function (Hub $hub) use ($users) {
+                $hub->followers()->attach($users->random(rand(1, $users->count())));
+            })
             ->create();
     }
 }
