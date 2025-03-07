@@ -17,6 +17,7 @@ use Illuminate\Support\Carbon;
  * @property integer $id
  * @property integer $user_id
  * @property string $slug
+ * @property integer $follower_count
  *
  * @property string $display_name
  * @property string|null $first_name

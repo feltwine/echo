@@ -27,7 +27,6 @@ use Illuminate\Support\Carbon;
  *
  * @property integer $id
  * @property string $user_name
- * @property integer $follower_count
  *
  * @property string|null $email
  * @property string|Carbon|null $email_verified_at
