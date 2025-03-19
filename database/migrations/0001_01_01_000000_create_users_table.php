@@ -45,6 +45,7 @@ return new class extends Migration
         Schema::create('user_profiles', function (Blueprint $table) {
             $table->id();
             $table->foreignId('user_id')->unique()->index();
+            $table->integer('reputation')->default(0);
             $table->integer('followers_count')->default(0);
 
             $table->string('display_name');

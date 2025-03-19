@@ -14,6 +14,7 @@ return new class extends Migration
         Schema::create('posts', function (Blueprint $table) {
             $table->id();
             $table->integer('followers_count')->default(0);
+            $table->integer('comment_count')->default(0);
 
             $table->foreignId('user_id')->constrained('users')->onDelete('cascade');
             $table->foreignId('hub_id')->constrained('hubs')->onDelete('cascade');
