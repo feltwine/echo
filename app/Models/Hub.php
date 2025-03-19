@@ -13,6 +13,7 @@ use Illuminate\Database\Eloquent\Relations\BelongsToMany;
 use Illuminate\Database\Eloquent\Relations\HasMany;
 use Illuminate\Database\Eloquent\SoftDeletes;
 use Illuminate\Support\Carbon;
+use Illuminate\Support\Str;
 
 /**
  * @property User $user
@@ -57,9 +58,7 @@ class Hub extends Model
     public function slug(): Attribute
     {
         return Attribute::make(
-            get: function() {
-                return Carbon::parse($this->name);
-            }
+            get: fn() => Str::slug($this->name)
         );
     }
 
