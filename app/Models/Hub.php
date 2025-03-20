@@ -23,7 +23,7 @@ use Illuminate\Support\Str;
  *
  * @property integer $id
  * @property integer $user_id
- * @property integer $follower_count
+ * @property integer $followers_count
  *
  * @property string $name
  * @property string $slug
@@ -55,13 +55,6 @@ class Hub extends Model
         'deleted_at' => 'datetime',
     ];
 
-    public function slug(): Attribute
-    {
-        return Attribute::make(
-            get: fn() => Str::slug($this->name)
-        );
-    }
-
     public function user(): BelongsTo
     {
         return $this->belongsTo(User::class);
@@ -77,7 +70,7 @@ class Hub extends Model
         return $this->hasMany(Post::class);
     }
 
-    public function followers(): belongsToMany
+    public function followers(): BelongsToMany
     {
         return $this->BelongsToMany(User::class, 'hub_followers', 'hub_id', 'user_id')
             ->withTimestamps();

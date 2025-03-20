@@ -326,6 +326,7 @@ class DatabaseSeeder extends Seeder
                     'id' => $hubId,
                     'user_id' => $hubOwnerId,
                     'name' => $this->hubNames[$hubIndex],
+                    'slug' => $this->hubNames[$hubIndex],
                     'description' => $randomDescription, // Add the description here
                     'created_at' => $this->now,
                     'updated_at' => $this->now,

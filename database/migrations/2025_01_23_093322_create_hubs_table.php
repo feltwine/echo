@@ -17,13 +17,14 @@ return new class extends Migration
             $table->integer('followers_count')->default(0);
 
             $table->string('name')->unique();
+            $table->string('slug')->unique();
             $table->text('description')->nullable();
             $table->fullText(['name', 'description']);
             $table->enum('status', ['public', 'private'])->default('private');
 
             $table->string('avatar_path')->nullable();
             $table->string('background_path')->nullable();
-            $table->string('background_color')->default('#FFFFFF');
+            $table->string('background_color')->default('#721378');
 
             $table->softDeletes();
             $table->timestamps();

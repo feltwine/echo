@@ -26,6 +26,6 @@
                 </div>
             </div>
         </div>
-        <hr class="h-px w-full border-0 bg-fuchsia-700 opacity-50 mx-auto ">
+        <hr class="h-px border-0 bg-fuchsia-900">
     </div>
 @endforeach
